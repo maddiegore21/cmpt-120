@@ -1,6 +1,5 @@
 from math import pi
-from multiprocessing.util import DEFAULT_LOGGING_FORMAT
-from readline import set_completion_display_matches_hook
+from re import I
 from unittest import result
 
 
@@ -9,12 +8,10 @@ def calculate_sum(n):
     This function should calculate the sum every number from 0 up until n (NON-INCLUSIVE).
     @return: this method should just return the sum of every number from 0 to n.
     '''
+
     result = 0
-
-    for i in range (n) :
-        result=result+i
-    
-
+    for i in range(0, n):
+        result = result + i
 
     # your logic
 
@@ -39,15 +36,17 @@ def calculate_pi(n):
     @return: the calculated
     '''
 
-    result = 1
-    denom = 1
+    result = 0
+    k = 1
+    for i in range(0, n):
+        if i % 2 == 0:
+            result += 4/k
+        else:
+            result -= 4/k
+        k += 2
+
     # your logic
-    for i in range(0,n):
-       if i % 2 == 0:
-             result = i - 4 / denom
-       else:
-            result = i + 4 / denom
-        
+
     return result
 
 
@@ -56,22 +55,16 @@ def fibonacci(n):
     The fibonacci sequence is a series of numbers. The next number is found
     by adding up the two numbers before it in the sequence. The series looks
     like this [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...]
-    Hint: the first two numbers are 0 and 1. 
+    Hint: the first two numbers are 0 and 1. `
     @arg(n): the number of terms in the series to calculate.
     @return: the sum of the fibonacci numbers up until n.
     '''
 
-    result = 0
-    i = 0
-    first = 0
-    second = 1
-    for i in range (n):
-        result = result + first
-        next_term = first + second
-        first = second
-        second = next_term
-        i = i + 1
-
+    fib = [0,1]
+    
+    for i in range (1,n):
+        if n > 2:
+            val = fib [i] + fib[i-1]
+            fib.append(val)
+    return fib[n-1]
     # your logic
-
-    return result
